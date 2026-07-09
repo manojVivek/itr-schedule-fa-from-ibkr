@@ -45,6 +45,12 @@ no account numbers, no analytics. SBI TTBR tables ship as static JSON in the app
    exactly which year is missing and asks for it; unresolved lots are **excluded**
    from the workbook (never estimated).
 
+## How it works
+
+Want to understand or verify the computation — or do it by hand? See
+**[docs/how-schedule-fa-is-computed.md](docs/how-schedule-fa-is-computed.md)** — a plain-English
+walkthrough with worked examples (per-lot TTBR conversion, daily-max peak, FIFO, the cash account).
+
 ## Develop
 
 ```bash
