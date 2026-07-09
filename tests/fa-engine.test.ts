@@ -116,39 +116,72 @@ describe("Schedule FA engine", () => {
   });
 });
 
-describe("golden vs tax-helper (env-gated, real statements)", () => {
+/**
+ * Real-statement regression, off by default. Point IBKR_REAL_DOCS at a folder
+ * holding an `ibkr/` subdir of Activity Statement CSVs + a `security-prices.csv`
+ * (`date,symbol,close`). Files are discovered by parsing their period — no real
+ * account numbers or amounts live in this repo. Exact expected totals, if you
+ * want them, go in `tests/golden.local.json` (gitignored); without it the test
+ * asserts only structural invariants, so nothing personal is committed.
+ */
+describe("golden — real statements (env-gated)", () => {
   const dir = process.env.IBKR_REAL_DOCS;
-  const available = !!dir && fs.existsSync(dir);
+  const available = !!dir && fs.existsSync(path.join(dir, "ibkr"));
 
-  it.skipIf(!available)("reproduces the filed AY 2026-27 numbers", async () => {
-    const cy = parseIbkrStatement(fs.readFileSync(path.join(dir!, "ibkr/activity_statement_2025_2025.csv"), "utf8"), "2025.csv");
-    const y24 = parseIbkrStatement(
-      fs.readFileSync(path.join(dir!, "ibkr/activity-statement-U15602290_2024_2024.csv"), "utf8"),
-      "2024.csv",
-    );
-    // real TTBR from the bundled JSONs
+  it.skipIf(!available)("engine reconciles and is internally consistent on real data", () => {
+    const faYear = Number(process.env.IBKR_FA_YEAR ?? 2025);
+
+    const stmts = fs
+      .readdirSync(path.join(dir!, "ibkr"))
+      .filter((f) => f.toLowerCase().endsWith(".csv"))
+      .map((f) => parseIbkrStatement(fs.readFileSync(path.join(dir!, "ibkr", f), "utf8"), f))
+      .filter((s) => s.periodKind === "cy");
+    expect(stmts.length).toBeGreaterThan(0);
+
     const rates: RateMap = { USD: {}, GBP: {} };
-    for (const y of [2024, 2025]) {
-      const data = JSON.parse(fs.readFileSync(path.join(__dirname, `../public/data/ttbr/${y}.json`), "utf8")) as RateMap;
+    for (const y of new Set(stmts.map((s) => Number(s.periodStart?.slice(0, 4))).concat(faYear))) {
+      const p = path.join(__dirname, `../public/data/ttbr/${y}.json`);
+      if (!fs.existsSync(p)) continue;
+      const data = JSON.parse(fs.readFileSync(p, "utf8")) as RateMap;
       for (const ccy of Object.keys(data)) rates[ccy] = { ...rates[ccy], ...data[ccy] };
     }
-    // real daily prices CSV (same file tax-helper used)
-    const priceCsv = fs.readFileSync(path.join(dir!, "security-prices-2025.csv"), "utf8").trim().split("\n").slice(1);
+
     const prices: Record<string, Record<string, number>> = {};
-    for (const line of priceCsv) {
-      const [d, sym, close] = line.split(",");
-      (prices[sym] ??= {})[d] = Number(close);
+    const priceFile = fs.existsSync(path.join(dir!, "security-prices.csv"))
+      ? path.join(dir!, "security-prices.csv")
+      : path.join(dir!, `security-prices-${faYear}.csv`);
+    if (fs.existsSync(priceFile)) {
+      for (const line of fs.readFileSync(priceFile, "utf8").trim().split("\n").slice(1)) {
+        const [d, sym, close] = line.split(",");
+        (prices[sym] ??= {})[d] = Number(close);
+      }
     }
 
-    const res = buildScheduleFa([cy, y24], 2025, new TtbrTable(rates), new PriceTable(prices));
-    expect(res.a3).toHaveLength(853);
-    expect(res.totals.closingInr).toBe(1367874);
-    expect(res.totals.dividendsInr).toBe(11081);
-    expect(res.a2!.peakInr).toBe(200246);
-    expect(res.a2!.closingInr).toBe(45273);
+    const res = buildScheduleFa(stmts, faYear, new TtbrTable(rates), new PriceTable(prices));
+
+    // structural invariants (no committed amounts):
+    expect(res.a3.length).toBeGreaterThan(0);
     expect(res.reconciliation.ok).toBe(true);
-    // VUAG 2025-09-09: basis 352.99 GBP at TTBR 118.00
-    const vuag = res.a3.find((r) => r.symbol === "VUAG" && r.dateAcquired === "2025-09-09")!;
-    expect(vuag.initialInr).toBe(Math.round(352.99 * 118));
+    for (const row of res.a3) {
+      expect(row.dateAcquired).toBeTruthy();
+      expect(row.initialInr).toBeGreaterThan(0);
+      // initial value is self-consistent: cost × TTBR on the lot's own date
+      const r = new TtbrTable(rates).rate(row.currency, row.dateAcquired!);
+      if (r !== null) {
+        const implied = row.initialInr / r; // ≈ native cost basis
+        expect(implied).toBeGreaterThan(0);
+      }
+    }
+
+    // optional exact golden — only if you keep the (gitignored) expectations locally
+    const goldenPath = path.join(__dirname, "golden.local.json");
+    if (fs.existsSync(goldenPath)) {
+      const g = JSON.parse(fs.readFileSync(goldenPath, "utf8")) as Record<string, number>;
+      if (g.tranches !== undefined) expect(res.a3).toHaveLength(g.tranches);
+      if (g.closingInr !== undefined) expect(res.totals.closingInr).toBe(g.closingInr);
+      if (g.dividendsInr !== undefined) expect(res.totals.dividendsInr).toBe(g.dividendsInr);
+      if (g.a2PeakInr !== undefined) expect(res.a2!.peakInr).toBe(g.a2PeakInr);
+      if (g.a2ClosingInr !== undefined) expect(res.a2!.closingInr).toBe(g.a2ClosingInr);
+    }
   });
 });

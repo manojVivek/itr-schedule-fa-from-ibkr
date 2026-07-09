@@ -9,3 +9,5 @@ next-env.d.ts
 *.csv
 !tests/fixtures/*.csv
 !public/samples/*.csv
+# local-only golden expectations (real portfolio totals — never commit)
+tests/golden.local.json
