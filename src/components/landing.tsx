@@ -170,21 +170,21 @@ export function Landing({
             <ol style={{ margin: 0, paddingLeft: 18, fontSize: 12.5, lineHeight: 1.7, color: "var(--ink)" }}>
               <li>
                 In IBKR Client Portal, open{" "}
-                <strong style={{ fontWeight: 600 }}>Performance &amp; Reports → Statements</strong>.
+                <strong style={{ fontWeight: 600 }}>Performance &amp; Reports → Statements → Activity</strong>.
               </li>
               <li>
-                Under <strong style={{ fontWeight: 600 }}>Activity</strong>, set{" "}
-                <strong style={{ fontWeight: 600 }}>Period → Custom Date Range</strong>: 01 Jan {year} to 31 Dec {year}.
+                In the dialog, set <strong style={{ fontWeight: 600 }}>Period → Annual</strong> and{" "}
+                <strong style={{ fontWeight: 600 }}>Date → {year}</strong>.
               </li>
               <li>
-                Set <strong style={{ fontWeight: 600 }}>Format → CSV</strong> (not PDF), then Run and download.
+                Click <strong style={{ fontWeight: 600 }}>Download CSV</strong> (not PDF or HTML).
               </li>
             </ol>
             <div style={{ marginTop: 10, fontSize: 12, lineHeight: 1.55, color: "var(--muted)", textWrap: "pretty" }}>
-              <strong style={{ color: "var(--ink)", fontWeight: 600 }}>Held stocks more than a year?</strong>{" "}Also
-              download the same Activity Statement for each earlier year you first bought a holding still open on 31 Dec —
-              Schedule FA needs every lot&rsquo;s original purchase date and cost. The app detects the gap and asks for exactly
-              the year it needs.
+              <strong style={{ color: "var(--ink)", fontWeight: 600 }}>Held stocks more than a year?</strong>{" "}Repeat with the{" "}
+              <strong style={{ color: "var(--ink)", fontWeight: 600 }}>Date</strong>{" "}set to each earlier year you first bought a
+              holding still open on 31 Dec — Schedule FA needs every lot&rsquo;s original purchase date and cost. The app
+              detects the gap and asks for exactly the year it needs.
             </div>
           </div>
         </div>
