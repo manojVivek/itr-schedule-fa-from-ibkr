@@ -1,0 +1,79 @@
+/* Ledger theme (design defaults) — ITR Schedule FA Helper */
+:root {
+  --paper: #faf8f3;
+  --ink: #1d1b16;
+  --muted: #6e6857;
+  --rule: #e5e0d2;
+  --card: #ffffff;
+  --soft: #f1eee4;
+  --accent: #1e6e50;
+  --display: var(--font-serif), "IBM Plex Serif", serif;
+  --dispW: 500;
+  --dispLs: 0em;
+  --fig: var(--font-sans), "IBM Plex Sans", sans-serif; /* figures: sans (default) */
+  --fs: 13px;
+  --rY: 9px;
+  --tileP: 18px;
+  --mono: var(--font-mono), "IBM Plex Mono", monospace;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), "IBM Plex Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+}
+
+::selection {
+  background: #dcede4;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hoverRow:hover {
+  background: var(--soft);
+}
+.hoverDrop:hover {
+  border-color: var(--accent) !important;
+  background: color-mix(in oklab, var(--accent) 4%, #ffffff);
+}
+.hoverBtn:hover {
+  filter: brightness(1.08);
+}
+.hoverGhost:hover {
+  color: var(--ink) !important;
+  border-color: var(--muted) !important;
+}

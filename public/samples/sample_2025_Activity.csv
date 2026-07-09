@@ -1,0 +1,51 @@
+Statement,Header,Field Name,Field Value
+Statement,Data,BrokerName,Interactive Brokers
+Statement,Data,Period,"January 1, 2025 - December 31, 2025"
+Account Information,Header,Field Name,Field Value
+Account Information,Data,Account,U7842910
+Account Information,Data,Base Currency,USD
+Financial Instrument Information,Header,Asset Category,Symbol,Description,Conid,Security ID,Listing Exch,Multiplier,Type
+Financial Instrument Information,Data,Stocks,AAPL,APPLE INC,1001,US0378331005,NASDAQ,1,COMMON
+Financial Instrument Information,Data,Stocks,MSFT,MICROSOFT CORP,1002,US5949181045,NASDAQ,1,COMMON
+Financial Instrument Information,Data,Stocks,NVDA,NVIDIA CORP,1003,US67066G1040,NASDAQ,1,COMMON
+Financial Instrument Information,Data,Stocks,VOO,VANGUARD S&P 500 ETF,1004,US9229083632,ARCA,1,ETF
+Financial Instrument Information,Data,Stocks,TSLA,TESLA INC,1005,US88160R1014,NASDAQ,1,COMMON
+Financial Instrument Information,Data,Stocks,SHEL,SHELL PLC,1006,GB00BP6MXD84,LSE,1,COMMON
+Trades,Header,DataDiscriminator,Asset Category,Currency,Symbol,Date/Time,Quantity,T. Price,C. Price,Proceeds,Comm/Fee,Basis,Realized P/L,MTM P/L,Code
+Trades,Data,Order,Stocks,USD,NVDA,"2025-01-15, 11:20:05",25,134.20,134.5,-3355,-1,3356,0,0,O
+Trades,Data,Order,Stocks,USD,AAPL,"2025-04-08, 10:05:12",10,172.40,172.6,-1724,-1,1725,0,0,O
+Trades,Data,Order,Stocks,USD,MSFT,"2025-08-19, 13:44:00",4,505.30,505.8,-2021.2,-1,2022.2,0,0,O
+Trades,Data,Order,Stocks,USD,NVDA,"2025-10-03, 14:31:40",-5,188.40,188.1,942,-1,-671.2,269.8,0,C
+Dividends,Header,Currency,Date,Description,Amount
+Dividends,Data,USD,2025-05-15,AAPL(US0378331005) Cash Dividend USD 0.26 per Share,6.06
+Dividends,Data,USD,2025-06-12,MSFT(US5949181045) Cash Dividend USD 0.83 per Share,4.98
+Dividends,Data,USD,2025-06-27,VOO(US9229083632) Cash Dividend USD 1.784 per Share,16.06
+Dividends,Data,USD,2025-09-11,MSFT(US5949181045) Cash Dividend USD 0.83 per Share,4.98
+Dividends,Data,USD,2025-09-29,VOO(US9229083632) Cash Dividend USD 1.749 per Share,15.74
+Dividends,Data,USD,2025-10-02,NVDA(US67066G1040) Cash Dividend USD 0.01 per Share,0.25
+Dividends,Data,GBP,2025-09-22,SHEL(GB00BP6MXD84) Cash Dividend GBP 0.358 per Share,14.32
+Dividends,Data,Total,,,62.07
+Withholding Tax,Header,Currency,Date,Description,Amount,Code
+Withholding Tax,Data,USD,2025-05-15,AAPL(US0378331005) Cash Dividend - US Tax,-1.51,
+Withholding Tax,Data,USD,2025-06-12,MSFT(US5949181045) Cash Dividend - US Tax,-1.24,
+Withholding Tax,Data,USD,2025-06-27,VOO(US9229083632) Cash Dividend - US Tax,-4.02,
+Withholding Tax,Data,USD,2025-09-11,MSFT(US5949181045) Cash Dividend - US Tax,-1.24,
+Withholding Tax,Data,USD,2025-09-29,VOO(US9229083632) Cash Dividend - US Tax,-3.93,
+Withholding Tax,Data,Total,,,-11.94,
+Open Positions,Header,DataDiscriminator,Asset Category,Currency,Symbol,Quantity,Mult,Cost Price,Cost Basis,Close Price,Value,Unrealized P/L,Code
+Open Positions,Data,Summary,Stocks,USD,AAPL,30,1,190.83,5725,255.60,7668,1943,
+Open Positions,Data,Summary,Stocks,USD,MSFT,10,1,456.58,4565.8,512.40,5124,558.2,
+Open Positions,Data,Summary,Stocks,USD,NVDA,20,1,134.24,2684.8,196.30,3926,1241.2,
+Open Positions,Data,Summary,Stocks,USD,VOO,9,1,426.42,3837.8,602.10,5418.9,1581.1,
+Open Positions,Data,Summary,Stocks,USD,TSLA,6,1,170.27,1021.6,410.20,2461.2,1439.6,
+Open Positions,Data,Summary,Stocks,GBP,SHEL,40,1,26.13,1045,27.80,1112,67,
+Cash Report,Header,Currency Summary,Currency,Total,Securities,Futures
+Cash Report,Data,Starting Cash,Base Currency Summary,451.2,451.2,0
+Cash Report,Data,Ending Cash,Base Currency Summary,6373.72,6373.72,0
+Cash Report,Data,Starting Cash,USD,300,300,0
+Cash Report,Data,Ending Cash,USD,6169.83,6169.83,0
+Cash Report,Data,Starting Cash,GBP,120,120,0
+Cash Report,Data,Ending Cash,GBP,134.32,134.32,0
+Deposits & Withdrawals,Header,Currency,Settle Date,Description,Amount
+Deposits & Withdrawals,Data,USD,2025-03-01,Electronic Fund Transfer,12000
+Deposits & Withdrawals,Data,Total,,,12000

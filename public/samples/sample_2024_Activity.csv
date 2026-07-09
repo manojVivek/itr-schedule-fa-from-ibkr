@@ -1,0 +1,19 @@
+Statement,Header,Field Name,Field Value
+Statement,Data,BrokerName,Interactive Brokers
+Statement,Data,Period,"January 1, 2024 - December 31, 2024"
+Account Information,Header,Field Name,Field Value
+Account Information,Data,Account,U7842910
+Account Information,Data,Base Currency,USD
+Financial Instrument Information,Header,Asset Category,Symbol,Description,Conid,Security ID,Listing Exch,Multiplier,Type
+Financial Instrument Information,Data,Stocks,AAPL,APPLE INC,1001,US0378331005,NASDAQ,1,COMMON
+Financial Instrument Information,Data,Stocks,MSFT,MICROSOFT CORP,1002,US5949181045,NASDAQ,1,COMMON
+Financial Instrument Information,Data,Stocks,VOO,VANGUARD S&P 500 ETF,1004,US9229083632,ARCA,1,ETF
+Trades,Header,DataDiscriminator,Asset Category,Currency,Symbol,Date/Time,Quantity,T. Price,C. Price,Proceeds,Comm/Fee,Basis,Realized P/L,MTM P/L,Code
+Trades,Data,Order,Stocks,USD,VOO,"2024-02-12, 10:12:00",4,452.20,452.5,-1808.8,-1,1809.8,0,0,O
+Trades,Data,Order,Stocks,USD,AAPL,"2024-03-14, 11:30:00",12,173.50,173.8,-2082,-1,2083,0,0,O
+Trades,Data,Order,Stocks,USD,MSFT,"2024-06-10, 09:50:00",6,424.10,424.4,-2544.6,-1,2545.6,0,0,O
+Trades,Data,Order,Stocks,USD,AAPL,"2024-11-21, 15:02:00",8,229.00,229.3,-1832,-1,1833,0,0,O
+Open Positions,Header,DataDiscriminator,Asset Category,Currency,Symbol,Quantity,Mult,Cost Price,Cost Basis,Close Price,Value,Unrealized P/L,Code
+Open Positions,Data,Summary,Stocks,USD,AAPL,20,1,195.80,3916,250.42,5008.4,1092.4,
+Open Positions,Data,Summary,Stocks,USD,MSFT,6,1,424.27,2545.6,421.50,2529,-16.6,
+Open Positions,Data,Summary,Stocks,USD,VOO,9,1,424.20,3817.8,538.10,4842.9,1025.1,

@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+.env*
+.DS_Store
+# never commit real broker statements
+*.csv
+!tests/fixtures/*.csv
+!public/samples/*.csv

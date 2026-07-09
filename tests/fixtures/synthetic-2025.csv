@@ -1,0 +1,34 @@
+Statement,Header,Field Name,Field Value
+Statement,Data,BrokerName,Interactive Brokers
+Statement,Data,Period,"January 1, 2025 - December 31, 2025"
+Account Information,Header,Field Name,Field Value
+Account Information,Data,Account,U1234567
+Account Information,Data,Base Currency,USD
+Financial Instrument Information,Header,Asset Category,Symbol,Description,Conid,Security ID,Listing Exch,Multiplier,Type
+Financial Instrument Information,Data,Stocks,AAA,ALPHA ASSET ETF,111,US00000AAA0,ARCA,1,ETF
+Financial Instrument Information,Data,Stocks,BBB,BETA HOLDINGS,222,US00000BBB0,NASDAQ,1,COMMON
+Trades,Header,DataDiscriminator,Asset Category,Currency,Symbol,Date/Time,Quantity,T. Price,C. Price,Proceeds,Comm/Fee,Basis,Realized P/L,MTM P/L,Code
+Trades,Data,Order,Stocks,USD,AAA,"2025-01-02, 10:00:00",10,99.9,100,-999,-1,1000,0,0,O
+Trades,Data,Order,Stocks,USD,AAA,"2025-06-30, 10:00:00",5,119.8,120,-599,-1,600,0,0,O
+Trades,Data,Order,Stocks,USD,AAA,"2025-09-30, 10:00:00",-6,120,120,720,-1,-719,40,0,C
+Trades,Data,Order,Forex,USD,GBP.USD,"2025-05-01, 10:00:00",100,1.3,1.3,-130,-1,0,0,0,O
+Trades,SubTotal,,Stocks,USD,AAA,,9,,,,,,,,
+Dividends,Header,Currency,Date,Description,Amount
+Dividends,Data,USD,2025-07-15,AAA(US00000AAA0) Cash Dividend USD 1.00 per Share,15
+Dividends,Data,Total,,,15
+Withholding Tax,Header,Currency,Date,Description,Amount,Code
+Withholding Tax,Data,USD,2025-07-15,AAA(US00000AAA0) Cash Dividend - US Tax,-3.75,
+Withholding Tax,Data,Total,,,-3.75,
+Open Positions,Header,DataDiscriminator,Asset Category,Currency,Symbol,Quantity,Mult,Cost Price,Cost Basis,Close Price,Value,Unrealized P/L,Code
+Open Positions,Data,Summary,Stocks,USD,AAA,9,1,106.66,960,130,1170,210,
+Open Positions,Data,Summary,Stocks,USD,BBB,2,1,140,280,150,300,20,
+Cash Report,Header,Currency Summary,Currency,Total,Securities,Futures
+Cash Report,Data,Starting Cash,Base Currency Summary,100,100,0
+Cash Report,Data,Ending Cash,Base Currency Summary,1220.65,1220.65,0
+Cash Report,Data,Starting Cash,USD,100,100,0
+Cash Report,Data,Ending Cash,USD,1099.25,1099.25,0
+Cash Report,Data,Starting Cash,GBP,0,0,0
+Cash Report,Data,Ending Cash,GBP,100,100,0
+Deposits & Withdrawals,Header,Currency,Settle Date,Description,Amount
+Deposits & Withdrawals,Data,USD,2025-01-02,Electronic Fund Transfer,2000
+Deposits & Withdrawals,Data,Total,,,2000
