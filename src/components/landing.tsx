@@ -219,8 +219,8 @@ export function Landing({
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 22 }}>
             {[
-              ["Stays on your machine", "Parsing and every ₹ computation happen in-tab. Close the tab — nothing persists, nothing is uploaded."],
-              ["Only tickers go out", "A request like “AAPL daily closes” fetches public prices. No amounts, no account numbers, no analytics."],
+              ["Stays on your machine", "Parsing and every ₹ computation happen in-tab. Your statement and its numbers are never uploaded."],
+              ["Only tickers go out", "To price your holdings we send ticker symbols only — no amounts, no account numbers. Usage is measured with anonymous page-view analytics."],
               ["Open source", "The entire pipeline — parsing, TTBR lookup, workbook writer — is auditable, line by line."],
             ].map(([t, d]) => (
               <div key={t}>

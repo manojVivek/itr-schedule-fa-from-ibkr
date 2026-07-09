@@ -30,9 +30,17 @@ IBKR investors, to the Black-Money-Act "tranche-level" standard.
 ## Privacy
 
 **Your statement never leaves your browser.** Parsing and every ₹ computation run
-in-tab. The only network request is a list of **ticker symbols** sent to a small
-`/api/prices` proxy that fetches public end-of-day closes (Yahoo) — no amounts,
-no account numbers, no analytics. SBI TTBR tables ship as static JSON in the app.
+in-tab — your amounts, account numbers and holdings are never uploaded. Only two
+things leave the tab, neither tied to you:
+
+- **Ticker symbols** — sent to a small `/api/prices` proxy that fetches public
+  end-of-day closes (Yahoo). No amounts, no account numbers.
+- **Anonymous page-view analytics** —
+  [Vercel Web Analytics](https://vercel.com/docs/analytics) counts page visits with
+  no cookies and no personal data; it never sees your statement or any figure
+  computed from it.
+
+SBI TTBR tables ship as static JSON in the app.
 
 ## Inputs
 
