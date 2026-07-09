@@ -37,8 +37,7 @@ no account numbers, no analytics. SBI TTBR tables ship as static JSON in the app
 ## Inputs
 
 1. **IBKR Activity Statement CSV** for the FA calendar year (1 Jan – 31 Dec) —
-   required. In IBKR: *Performance & Reports → Statements → Activity → Custom
-   Date Range (Jan 1 – Dec 31) → Format **CSV***.
+   required. In IBKR: *Performance & Reports → Statements → Activity*, set **Period → Annual**, **Date → the year**, then **Download CSV**.
 2. **Prior-year Activity Statements** — only needed when holdings you still owned
    at year-end were bought earlier. Schedule FA needs each lot's **original**
    purchase date and cost, which only that year's statement has. The app detects
