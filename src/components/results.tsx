@@ -11,6 +11,17 @@ const fig: CSSProperties = { fontFamily: "var(--fig)", fontVariantNumeric: "tabu
 const th: CSSProperties = { ...mono, fontSize: 9.5, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--muted)" };
 const gridCols = "minmax(225px, 1.5fr) minmax(195px, 1.2fr) repeat(5, minmax(105px, 1fr))";
 
+/** Action-required red — a warm brick that sits in the ledger paper palette. */
+const RED = {
+  border: "#E4C3BB",
+  bg: "#FBEDE8",
+  strong: "#A23A26", // icon + CTA fill
+  onStrong: "#FCF1ED",
+  title: "#7A2A1A",
+  body: "#8F4535",
+  muted: "#B06B57",
+};
+
 function prettyDate(iso?: string): string {
   if (!iso) return "";
   const d = new Date(iso + "T00:00:00Z");
@@ -245,19 +256,19 @@ export function Results({
 
         {/* pending-history warning */}
         {pending.length > 0 && (
-          <div style={{ marginTop: 14, border: "1px solid #E8D9AD", background: "#FBF4DF", borderRadius: 10, padding: "14px 16px", display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
-            <div style={{ width: 20, height: 20, flex: "none", borderRadius: "50%", background: "#8A6A1B", color: "#FBF4DF", fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" }}>!</div>
+          <div style={{ marginTop: 14, border: `1px solid ${RED.border}`, background: RED.bg, borderRadius: 10, padding: "14px 16px", display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
+            <div style={{ width: 20, height: 20, flex: "none", borderRadius: "50%", background: RED.strong, color: RED.onStrong, fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" }}>!</div>
             <div style={{ flex: 1, minWidth: 240 }}>
-              <div style={{ fontWeight: 600, fontSize: 13.5, color: "#5C4610" }}>
+              <div style={{ fontWeight: 600, fontSize: 13.5, color: RED.title }}>
                 {pending.length} holding{pending.length > 1 ? "s" : ""} lack acquisition history
               </div>
-              <div style={{ fontSize: 12.5, lineHeight: 1.5, color: "#7A5F1E", marginTop: 3, textWrap: "pretty" }}>
+              <div style={{ fontSize: 12.5, lineHeight: 1.5, color: RED.body, marginTop: 3, textWrap: "pretty" }}>
                 {pending.map((u) => u.symbol).join(", ")} {pending.length > 1 ? "were" : "was"} bought before your earliest
                 statement, so their purchase dates and costs are not in these files. They are excluded from the workbook
                 until resolved — nothing is ever estimated.
               </div>
             </div>
-            <button onClick={onAddHistory} className="hoverBtn" style={{ background: "#8A6A1B", color: "#FBF4DF", border: "none", borderRadius: 8, padding: "9px 14px", fontSize: 12.5, fontWeight: 600, cursor: "pointer" }}>
+            <button onClick={onAddHistory} className="hoverBtn" style={{ background: RED.strong, color: RED.onStrong, border: "none", borderRadius: 8, padding: "9px 14px", fontSize: 12.5, fontWeight: 600, cursor: "pointer" }}>
               {addHistoryLabel || `Add ${neededYear} Activity Statement`}
             </button>
           </div>
@@ -324,9 +335,9 @@ export function Results({
                           </div>
                         ))}
                         {sec.pending && (
-                          <div style={{ display: "flex", justifyContent: "space-between", gap: 14, flexWrap: "wrap", padding: "var(--rY) 18px", paddingLeft: 36, borderTop: "1px solid color-mix(in oklab, var(--rule) 55%, #FFFFFF)", background: "#FCF7E8" }}>
-                            <span style={{ ...mono, fontSize: 11.5, color: "#7A5F1E" }}>↳ {sec.pending.note}</span>
-                            <span style={{ ...mono, fontSize: 11, color: "#A08A4E" }}>{sec.pending.det}</span>
+                          <div style={{ display: "flex", justifyContent: "space-between", gap: 14, flexWrap: "wrap", padding: "var(--rY) 18px", paddingLeft: 36, borderTop: "1px solid color-mix(in oklab, var(--rule) 55%, #FFFFFF)", background: RED.bg }}>
+                            <span style={{ ...mono, fontSize: 11.5, color: RED.body }}>↳ {sec.pending.note}</span>
+                            <span style={{ ...mono, fontSize: 11, color: RED.muted }}>{sec.pending.det}</span>
                           </div>
                         )}
                       </div>
@@ -399,7 +410,7 @@ export function Results({
               Download {dlName}
             </button>
             {pending.length > 0 && (
-              <div style={{ ...mono, fontSize: 10.5, color: "#8A6A1B", marginTop: 9, lineHeight: 1.5 }}>
+              <div style={{ ...mono, fontSize: 10.5, color: RED.strong, marginTop: 9, lineHeight: 1.5 }}>
                 {pending.length} pending holding{pending.length > 1 ? "s are" : " is"} excluded until history is added — never estimated.
               </div>
             )}

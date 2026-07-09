@@ -59,7 +59,7 @@ export function Landing({
 
       <section style={{ maxWidth: 880, margin: "0 auto", padding: "0 28px" }}>
         <div style={{ background: "var(--card)", border: "1px solid var(--rule)", borderRadius: 12, padding: 24, boxShadow: "0 1px 2px rgba(29,27,22,0.04)" }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14, flexWrap: "wrap", marginBottom: 18 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14, flexWrap: "wrap", marginBottom: 6 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <span style={{ ...mono, fontSize: 10.5, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--muted)" }}>FA year</span>
               <div style={{ display: "inline-flex", border: "1px solid var(--rule)", borderRadius: 8, overflow: "hidden" }}>
@@ -72,8 +72,13 @@ export function Landing({
               </div>
             </div>
             <span style={{ fontSize: 12, color: "var(--muted)" }}>
-              Calendar year · 01 Jan – 31 Dec {year} · {ay}
+              01 Jan – 31 Dec {year} · filed in {ay}
             </span>
+          </div>
+          <div style={{ fontSize: 12, lineHeight: 1.5, color: "var(--muted)", marginBottom: 18, textWrap: "pretty" }}>
+            Schedule FA is disclosed on a <strong style={{ color: "var(--ink)", fontWeight: 600 }}>calendar-year</strong>{" "}basis
+            (Jan–Dec) — unlike the rest of the ITR, which uses the April–March financial year. Pick the calendar year you&rsquo;re
+            reporting; it goes into that year&rsquo;s return ({ay}).
           </div>
 
           <div
@@ -107,27 +112,44 @@ export function Landing({
               ↓
             </div>
             <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>Drop your IBKR Activity Statement CSVs</div>
-            <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 18 }}>
+            <div style={{ fontSize: 13, color: "var(--muted)", marginBottom: 6 }}>
               Multiple files welcome — the {year} statement is required; prior years cover older lots
             </div>
+            <div style={{ fontSize: 12, color: "var(--accent)", marginBottom: 18 }}>↓ New to this? See how to download them from IBKR below</div>
             <span
-              onClick={(e) => {
-                e.stopPropagation();
-                onDemo();
-              }}
               style={{
                 display: "inline-block",
                 background: "var(--accent)",
                 color: "#FCFBF8",
                 fontSize: 13.5,
                 fontWeight: 600,
-                padding: "10px 18px",
+                padding: "10px 20px",
                 borderRadius: 8,
               }}
             >
-              Load sample statements
+              Upload statements
             </span>
-            <div style={{ marginTop: 12, ...mono, fontSize: 10.5, color: "var(--muted)" }}>demo — parses bundled sample data, all in-tab</div>
+            <div style={{ marginTop: 12, fontSize: 12, color: "var(--muted)" }}>
+              or{" "}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDemo();
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  font: "inherit",
+                  fontSize: 12,
+                  color: "var(--accent)",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                }}
+              >
+                try it with sample data
+              </button>
+            </div>
             <input
               ref={inputRef}
               type="file"
@@ -141,10 +163,29 @@ export function Landing({
             />
           </div>
 
-          <div style={{ marginTop: 16, background: "var(--soft)", borderRadius: 8, padding: "12px 15px", fontSize: 12.5, lineHeight: 1.55, color: "var(--muted)", textWrap: "pretty" }}>
-            <strong style={{ color: "var(--ink)", fontWeight: 600 }}>Held stocks more than a year?</strong>{" "}Keep prior-year
-            statements handy — Schedule FA needs each lot&rsquo;s original purchase date and cost. The app detects gaps and asks
-            for exactly the year it&rsquo;s missing.
+          <div style={{ marginTop: 16, background: "var(--soft)", borderRadius: 8, padding: "14px 16px" }}>
+            <div style={{ ...mono, fontSize: 10.5, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 8 }}>
+              How to get the statement from IBKR
+            </div>
+            <ol style={{ margin: 0, paddingLeft: 18, fontSize: 12.5, lineHeight: 1.7, color: "var(--ink)" }}>
+              <li>
+                In IBKR Client Portal, open{" "}
+                <strong style={{ fontWeight: 600 }}>Performance &amp; Reports → Statements</strong>.
+              </li>
+              <li>
+                Under <strong style={{ fontWeight: 600 }}>Activity</strong>, set{" "}
+                <strong style={{ fontWeight: 600 }}>Period → Custom Date Range</strong>: 01 Jan {year} to 31 Dec {year}.
+              </li>
+              <li>
+                Set <strong style={{ fontWeight: 600 }}>Format → CSV</strong> (not PDF), then Run and download.
+              </li>
+            </ol>
+            <div style={{ marginTop: 10, fontSize: 12, lineHeight: 1.55, color: "var(--muted)", textWrap: "pretty" }}>
+              <strong style={{ color: "var(--ink)", fontWeight: 600 }}>Held stocks more than a year?</strong>{" "}Also
+              download the same Activity Statement for each earlier year you first bought a holding still open on 31 Dec —
+              Schedule FA needs every lot&rsquo;s original purchase date and cost. The app detects the gap and asks for exactly
+              the year it needs.
+            </div>
           </div>
         </div>
       </section>
