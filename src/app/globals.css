@@ -77,3 +77,39 @@ button {
   color: var(--ink) !important;
   border-color: var(--muted) !important;
 }
+
+/* Worked-example conversion table — 3 columns on wide, stacked on narrow.
+   Container query so it keys off the card width, not the viewport. */
+.convTable {
+  container-type: inline-size;
+}
+.convRow {
+  display: grid;
+  grid-template-columns: minmax(92px, 116px) 1fr minmax(96px, 128px);
+  gap: 0 14px;
+  align-items: baseline;
+  padding: 12px 16px;
+  border-top: 1px solid color-mix(in oklab, var(--rule) 60%, #ffffff);
+}
+.convRow > .cResult {
+  text-align: right;
+}
+@container (max-width: 440px) {
+  .convRow {
+    grid-template-columns: 1fr auto;
+    column-gap: 12px;
+    row-gap: 3px;
+    padding: 11px 14px;
+  }
+  .convRow > .cLabel {
+    grid-column: 1 / -1;
+  }
+  .convRow > .cFormula {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .convRow > .cResult {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}

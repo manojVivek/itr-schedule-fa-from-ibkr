@@ -1,10 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import type { CSSProperties } from "react";
 
 export const mono: CSSProperties = { fontFamily: "var(--mono)" };
 
-export function Header({ showReset, onReset }: { showReset: boolean; onReset: () => void }) {
+export function Header({ showReset = false, onReset }: { showReset?: boolean; onReset?: () => void }) {
   return (
     <header style={{ borderBottom: "1px solid var(--rule)" }}>
       <div
@@ -19,7 +20,7 @@ export function Header({ showReset, onReset }: { showReset: boolean; onReset: ()
           flexWrap: "wrap",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 11, textDecoration: "none", color: "inherit" }}>
           <div
             style={{
               width: 32,
@@ -54,8 +55,8 @@ export function Header({ showReset, onReset }: { showReset: boolean; onReset: ()
               IBKR → Schedule FA · in your browser
             </div>
           </div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+        </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
           <div
             style={{
               display: "flex",
@@ -72,6 +73,9 @@ export function Header({ showReset, onReset }: { showReset: boolean; onReset: ()
             <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)", flex: "none" }} />
             Files never leave this tab
           </div>
+          <Link href="/guide" style={{ fontSize: 12, fontWeight: 500 }}>
+            How it works
+          </Link>
           <a
             href="https://github.com/manojvivek/itr-schedule-fa-from-ibkr"
             target="_blank"
