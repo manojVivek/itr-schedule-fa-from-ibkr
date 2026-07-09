@@ -15,7 +15,6 @@ export function Landing({
   onDemo: () => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const ay = `AY ${year + 1}-${String(year + 2).slice(2)}`;
 
   const seg = (sel: boolean): React.CSSProperties => ({
     padding: "7px 16px",
@@ -61,24 +60,24 @@ export function Landing({
         <div style={{ background: "var(--card)", border: "1px solid var(--rule)", borderRadius: 12, padding: 24, boxShadow: "0 1px 2px rgba(29,27,22,0.04)" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14, flexWrap: "wrap", marginBottom: 6 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <span style={{ ...mono, fontSize: 10.5, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--muted)" }}>FA year</span>
+              <span style={{ ...mono, fontSize: 10.5, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--muted)" }}>Filing for</span>
               <div style={{ display: "inline-flex", border: "1px solid var(--rule)", borderRadius: 8, overflow: "hidden" }}>
                 <button style={seg(year === 2024)} onClick={() => onYear(2024)}>
-                  2024
+                  AY 2025-26
                 </button>
                 <button style={seg(year === 2025)} onClick={() => onYear(2025)}>
-                  2025
+                  AY 2026-27
                 </button>
               </div>
             </div>
             <span style={{ fontSize: 12, color: "var(--muted)" }}>
-              01 Jan – 31 Dec {year} · filed in {ay}
+              Schedule FA covers calendar year {year}
             </span>
           </div>
           <div style={{ fontSize: 12, lineHeight: 1.5, color: "var(--muted)", marginBottom: 18, textWrap: "pretty" }}>
-            Schedule FA is disclosed on a <strong style={{ color: "var(--ink)", fontWeight: 600 }}>calendar-year</strong>{" "}basis
-            (Jan–Dec) — unlike the rest of the ITR, which uses the April–March financial year. Pick the calendar year you&rsquo;re
-            reporting; it goes into that year&rsquo;s return ({ay}).
+            Pick the assessment year you&rsquo;re filing your return under. Its Schedule FA covers the{" "}
+            <strong style={{ color: "var(--ink)", fontWeight: 600 }}>calendar year</strong> (01 Jan – 31 Dec {year}) — that&rsquo;s
+            the calendar year, not the April–March period the rest of your ITR uses.
           </div>
 
           <div

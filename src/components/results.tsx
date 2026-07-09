@@ -157,7 +157,7 @@ export function Results({
     : [];
 
   const methRows = [
-    { k: "Scope", v: `FA year ${year} = calendar year 01/01/${year} – 31/12/${year}, disclosed in ITR-2 / ITR-3 for ${ay}.` },
+    { k: "Scope", v: `${ay} — Schedule FA covers calendar year 01/01/${year} – 31/12/${year} (the calendar year, not the April–March financial year used for income).` },
     { k: "Initial value", v: "Per lot: cost basis (incl. commission) × SBI TTBR on the acquisition date." },
     { k: "Peak value", v: "Per lot: units × maximum over the held window of (daily close × same-day SBI TTBR), anchored to the broker's own 31-Dec close so split-adjusted feeds cannot distort levels." },
     { k: "Closing value", v: `Units held on 31 Dec × broker-reported 31-Dec close × 31-Dec TTBR.` },
@@ -200,7 +200,7 @@ export function Results({
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 16, flexWrap: "wrap" }}>
           <div>
             <div style={{ ...mono, fontSize: 10.5, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)" }}>
-              Schedule FA · FA year {year} · {ay}
+              Schedule FA · {ay} · calendar year {year}
             </div>
             <h2 style={{ margin: "6px 0 9px", fontFamily: "var(--display)", fontWeight: "var(--dispW)" as unknown as number, fontSize: 26 }}>
               Foreign assets, per tranche
