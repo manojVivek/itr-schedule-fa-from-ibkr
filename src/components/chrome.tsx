@@ -124,7 +124,12 @@ export function Footer() {
           color: "var(--muted)",
         }}
       >
-        <span>ITR Schedule FA Helper · open source (MIT)</span>
+        <span>
+          ITR Schedule FA Helper · open source (MIT) · made by{" "}
+          <a href="https://manojvivek.dev" target="_blank" rel="noreferrer" style={{ color: "var(--accent)" }}>
+            Manoj Vivek ↗
+          </a>
+        </span>
         <span>Rates: SBI daily TTBR · Prices: public EOD by ticker · Not tax advice — review with your CA</span>
       </div>
     </footer>
