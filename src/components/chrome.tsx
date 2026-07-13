@@ -10,7 +10,7 @@ const OTHER_TOOLS = [
   {
     name: "Snowball",
     desc: "Dividend reinvestment calculator",
-    href: "https://snowball-dividends.vercel.app/",
+    href: "https://snowball-dividends.manojvivek.dev",
   },
 ];
 
