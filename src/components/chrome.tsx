@@ -1,9 +1,97 @@
 "use client";
 
 import Link from "next/link";
-import type { CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 export const mono: CSSProperties = { fontFamily: "var(--mono)" };
+
+// Cross-promoted sibling tools (manojvivek.dev). Extend as more ship.
+const OTHER_TOOLS = [
+  {
+    name: "Snowball",
+    desc: "Dividend reinvestment calculator",
+    href: "https://snowball-dividends.vercel.app/",
+  },
+];
+
+function OtherToolsMenu() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={ref} style={{ position: "relative", display: "flex" }}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 4,
+          background: "transparent",
+          border: "none",
+          cursor: "pointer",
+          padding: 0,
+          fontFamily: "inherit",
+          fontSize: 12,
+          fontWeight: 500,
+          color: "var(--accent)",
+        }}
+      >
+        Other tools
+        <span style={{ fontSize: 9, transform: open ? "rotate(180deg)" : "none", transition: "transform .15s" }}>▾</span>
+      </button>
+      {open && (
+        <div
+          role="menu"
+          style={{
+            position: "absolute",
+            top: "calc(100% + 9px)",
+            right: 0,
+            minWidth: 238,
+            background: "var(--card)",
+            border: "1px solid var(--rule)",
+            borderRadius: 10,
+            boxShadow: "0 12px 34px rgba(29,27,22,0.13)",
+            padding: 6,
+            zIndex: 60,
+          }}
+        >
+          {OTHER_TOOLS.map((t) => (
+            <a
+              key={t.href}
+              href={t.href}
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              className="hoverRow"
+              onClick={() => setOpen(false)}
+              style={{ display: "block", padding: "9px 11px", borderRadius: 7, textDecoration: "none" }}
+            >
+              <div style={{ fontFamily: "var(--display)", fontWeight: 600, fontSize: 13.5, color: "var(--ink)" }}>{t.name}</div>
+              <div style={{ fontSize: 11.5, color: "var(--muted)", marginTop: 2 }}>{t.desc}</div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function Header({ showReset = false, onReset }: { showReset?: boolean; onReset?: () => void }) {
   return (
@@ -76,6 +164,7 @@ export function Header({ showReset = false, onReset }: { showReset?: boolean; on
           <Link href="/guide" style={{ fontSize: 12, fontWeight: 500 }}>
             How it works
           </Link>
+          <OtherToolsMenu />
           <a
             href="https://github.com/manojvivek/itr-schedule-fa-from-ibkr"
             target="_blank"
